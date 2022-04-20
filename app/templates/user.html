@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="page-header">
+    <h1>用户资料</h1>
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <ul>
+            <li>
+                <p>用户名:</p><p>{{ user.username }}</p>
+            </li>
+            <li>
+                <p>个人介绍:</p><p>{{ user.about_me }}</p>
+            </li>
+            {% if current_user==user %}
+            <li>
+                <p>邮箱:</p><p>{{ user.email }}</p>
+            </li>
+            <li>
+                <p>注册时间:</p><p>{{ user.member_since }}</p>
+            </li>
+            <li>
+                <p>送货地址:</p><p>{{ user.address }}</p>
+            </li>
+            {% endif %}
+        </ul>
+        <div style="display:inline">
+        {% if current_user.is_administrator() %}
+            <a class="btn btn-danger" href="{{ url_for('auth.editProfileAdmin', id=user.id) }}">修改资料(ADMIN)</a>
+        {% elif user == current_user %}
+            <a class="btn btn-success" href="{{ url_for('auth.editProfile') }}">编辑资料</a>
+        {% endif %}
+        {% if current_user==user %}
+            <a class="btn btn-warning" href="{{ url_for('auth.changePassword') }}">修改密码</a>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

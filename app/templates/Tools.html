@@ -1,0 +1,22 @@
+{% macro renderError(message) %}
+<div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+</div>
+{% endmacro %}
+
+{% macro renderCommodity(commodity) %}
+<div class="col-md-3 commodity_background">
+    <a href="{{ url_for('main.commodity', id=commodity.id) }}">
+        <!--此图片链接仅用于测试，并非商品真实对应图片-->
+        <div class="col-md-12">
+            <img src="{{ commodity.commodity_img_src }}" class="commodity-img" alt="图片加载失败">
+        </div>
+        <ul>
+            <li><p>{{ commodity.name }}</p></li>
+            <li><p>{{ commodity.price }}￥</p></li>
+            <li><p>{{ commodity.description }}</p></li>
+        </ul>
+    </a>
+</div>
+{% endmacro %}

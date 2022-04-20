@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="page-header">
+    <h1>商品资料</h1>
+</div>
+<div class="row" style="display:inline">
+        <div class="col-md-6">
+            <img src="{{ commodity.commodity_img_src }}" class="col-md-10 col-md-offset-1">
+        </div>
+        <div class="col-md-4">
+            <ul>
+                <li>
+                    <p>商品名:</p><p>{{ commodity.name }}</p>
+                </li>
+                <li>
+                    <p>商品价格:</p><p>{{ commodity.price }}</p>
+                </li>
+                <li>
+                    <p>商品介绍:</p><p>{{ commodity.description }}</p>
+                </li>
+                <li>
+                    <p>销量:</p><p>{{ commodity.salesVolumes }}</p>
+                </li>
+            </ul>
+            <div style="display:inline">
+            {% if current_user.is_administrator() %}
+                <a class="btn btn-danger" href="{{ url_for('main.editCommodity', id=commodity.id) }}">修改商品资料(ADMIN)</a>
+            {% endif %}
+                <a class="btn btn-success" href="#">购买</a>
+            </div>
+        </div>
+</div>
+{% endblock %}
